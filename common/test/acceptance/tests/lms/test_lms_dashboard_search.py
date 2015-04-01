@@ -187,5 +187,6 @@ class DashboardSearchTest(WebAppTest):
         self.dashboard.visit()
 
         self.dashboard.search_for_term(search_string)
-        self.browser.save_screenshot('sc2.png')
-        assert search_string in self.dashboard.search_results.html[0]
+        assert self.dashboard.search_results.html[0].count(search_string) == 2
+        assert self.dashboard.search_results.html[0].count(self.courses['A']['display_name']) == 1
+        assert self.dashboard.search_results.html[0].count(self.courses['B']['display_name']) == 1
