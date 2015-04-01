@@ -2,6 +2,7 @@
 Testing indexing of the courseware as it is changed
 """
 import ddt
+import mock
 from datetime import datetime
 from mock import patch
 from pytz import UTC
@@ -371,3 +372,8 @@ class TestCoursewareSearchIndexer(MixedSplitTestCase):
     @ddt.data(ModuleStoreEnum.Type.mongo, ModuleStoreEnum.Type.split)
     def test_exception(self, store_type):
         self._perform_test_using_store(store_type, self._test_exception)
+
+    @ddt.data(ModuleStoreEnum.Type.mongo, ModuleStoreEnum.Type.split)
+    @mock.patch.dict("django.conf.settings.FEATURES", {'ENABLE_COURSEWARE_INDEX_LOGGING': True})
+    def test_indexing_course_logging(self, store_type):
+        self._perform_test_using_store(store_type, self._test_indexing_course)

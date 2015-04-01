@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from datetime import timedelta
 import logging
 
+from django.conf import settings
 from django.utils.translation import ugettext as _
 from eventtracking import tracker
 from xmodule.modulestore import ModuleStoreEnum
@@ -163,8 +164,8 @@ class CoursewareSearchIndexer(object):
             cls._track_index_request('edx.course.index.reindexed', indexed_count)
         return indexed_count
 
-    @staticmethod
-    def _track_index_request(event_name, indexed_count):
+    @classmethod
+    def _track_index_request(cls, event_name, indexed_count):
         """Track content index requests.
 
         Arguments:
@@ -178,6 +179,14 @@ class CoursewareSearchIndexer(object):
             'category': 'courseware_index',
         }
 
+        if settings.FEATURES.get('ENABLE_COURSEWARE_INDEX_LOGGING', False):
+            cls._emit_track_event(event_name, data)
+
+    @staticmethod
+    def _emit_track_event(event_name, data):
+        """
+        Emit and log index event.
+        """
         tracker.emit(
             event_name,
             data

@@ -140,6 +140,9 @@ FEATURES = {
     # Enable the courseware search functionality
     'ENABLE_COURSEWARE_INDEX': False,
 
+    # Enable the courseware index event logging functionality
+    'ENABLE_COURSEWARE_INDEX_LOGGING': False,
+
     # Enable course reruns, which will always use the split modulestore
     'ALLOW_COURSE_RERUNS': True,
 }
