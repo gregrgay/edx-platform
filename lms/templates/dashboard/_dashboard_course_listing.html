@@ -136,9 +136,9 @@ from student.helpers import (
                     </a>
                 % endif
                 % if share_settings.get('TWITTER_SHARING', False):
-                  <% share_text_default = "I'm learning on {platform_name}:%20".format(platform_name=settings.PLATFORM_NAME) %>
+                  <% share_text_default = _("I'm learning on {platform_name}:").format(platform_name=settings.PLATFORM_NAME) %>
                   <% share_text = share_settings.get('TWITTER_SHARING_TEXT', share_text_default) %>
-                  <% twitter_url = 'https://twitter.com/intent/tweet?text=' + share_text + share_url %>
+                  <% twitter_url = 'https://twitter.com/intent/tweet?text=' + share_text + '%20' + share_url %>
                     <a
                       data-tooltip="${_('Share on Twitter')}"
                       class="action action-twitter"
