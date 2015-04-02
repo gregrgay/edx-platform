@@ -107,7 +107,7 @@ class DashboardSearchTest(WebAppTest):
 
     def _studio_add_content(self, course_outline, html_content):
         """
-        Add content on studio course page under specified section.
+        Add content to first section on studio course page.
         """
         # create a unit in course outline
         course_outline.visit()
@@ -127,7 +127,7 @@ class DashboardSearchTest(WebAppTest):
 
     def _studio_publish_content(self, course_outline):
         """
-        Publish content on studio course page under specified section.
+        Publish content in first section on studio course page.
         """
         course_outline.visit()
         subsection = course_outline.section_at(0).subsection_at(0)
